@@ -1,0 +1,16 @@
+{
+  "name": "web-project",
+  "version": "1.0.0",
+  "description": "This is my web-dev project ,an e-commerce website for selling cars.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.19.2",
+    "nodemon": "^3.1.0"
+  }
+}
