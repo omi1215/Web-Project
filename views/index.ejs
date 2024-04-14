@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Models</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/css/footer.css">
+</head>
+<body>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/index.js"></script>
+
+    <%- include('./partials/header.ejs')  %>
+    
+    <div class="video-container">
+        <video id="porsche-video" class="video" loop autoplay muted>
+            <source src="/porsche-video/vid.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <button id="stopButton"><i id="icon" class="fas fa-pause"></i></button>
+    </div>
+
+    <div class="container offers-section">
+        <% for (let i = 0; i < offers.length; i += 3) { %>
+            <div class="row">
+                <% for (let j = i; j < i + 3 && j < offers.length; j++) { %>
+                    <div class="col-sm-12 col-md-6 col-lg-4 mb-4"> 
+                        <div class="card offer-card position-relative" style="border-radius: 20px;">
+                            <img src="<%= offers[j].image %>" class="card-img-top" alt="Offer Image">
+                            <div class="card-body position-absolute bottom-0 start-0 end-0" style="background-color: rgba(0, 0, 0, 0.5);">
+                                <p class="card-text text-white" style="font-size: 1.2rem;"><%= offers[j].description %></p> 
+                                <button class="btn btn-transparent position-absolute top-0 end-0 m-3" style="border: none;"><i class="fas fa-arrow-right text-white"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+        <% } %>
+    </div>
+    
+    
+ 
+
+    <div class="container">
+        <div class="Models d-flex justify-content-center pt-lg-5">
+            <div class="Models_heading">
+                <h1 style="font-weight: bold;">Models</h1>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <% cars.forEach((car,index) => { %>
+            <div class="col-xl-6 col-lg-12">
+                <div class="model_cards card shadow-lg  " style="width: 32rem;height: 45rem;">
+                    <img src="<%= car.image %>" class="card-img" alt="image not loaded">
+                    <div class="card-body card-img-overlay d-flex flex-column   ">
+                        <div class="card-img-top  carname"><%= car.name %></div>
+                        <div class="card-img-bottom  text-white cardesc">
+                            <div class="desctxt"><%= car.description %></div>
+                            <div class="carprice">
+                                From $ <%= car.price %>*
+                            </div>
+                            <div class="row buttons">
+                                <div class="col-6 col-xl-12 col-xxl-12 mb-2 ">
+                                    <div class="btn btn-light btn-block buildbtn text-center">Build your <%= car.name %></div>
+    
+                                </div>
+                                <div class="col-6 col-xl-12 col-xxl-12 mt-xl-1 mb-2 ">
+                                    <div class="btn transparent-btn btn-block allmodelbtn text-center ">All <%= car.name%> models</div>
+    
+                                </div>
+                        </div>
+                        
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <% }); %>
+        </div>
+        <div class="taxdesc">*Manufacturer’s Suggested Retail Price. Excludes options; taxes; title; registration; delivery, processing and handling fee; dealer charges. Dealer sets actual selling price.</div>
+    </div>
+    <div class="container container-fluid  d-flex justify-content-center align-items-center mb-lg-5">
+        <div class="card text-white dealercard">
+         <div class="row">
+             <div class="col-lg-6 order-lg-2 p-0"> 
+                 <img src="/HomeModels/porsche_dealership.jpeg" alt="Image not loaded" class="card-img-top" style="width: 100%;height: 100%;">
+             </div>
+             <div class="col-lg-6 order-lg-1 p-0 "> 
+                 <div class="card-body order-2 order-lg-1 findcenter ">
+                     <h4 class="card-title">Find Your Porsche Center</h4>
+                     <p class="card-text">A Porsche Center, and your dream Porsche vehicle, may be closer than you think.
+                     Search our Porsche Center network for the location closest to you.</p>
+                     <a href="#" class="btn btn-light dealersearchbtn">Search now</a>
+                 </div>
+             </div>
+             
+         </div>
+        </div>
+     </div>
+
+     <%- include('./partials/footer.ejs')  %>
+</body>
+
+</html>

@@ -10,7 +10,7 @@ app.set('views','./views')
 app.use(express.static(path.join(__dirname, 'Assets')));
 app.use(express.static(path.join(__dirname,'public')));
 app.get("/",(req,res)=>{
-    res.render('home_models',{cars, offers})
+    res.render('index',{cars, offers})
 })
 
 app.listen(5000,()=>{
