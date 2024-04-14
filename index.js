@@ -6,7 +6,7 @@ const path=require('path')
 
 app.set('view engine','ejs');
 app.set('views','./views')
-app.use(express.static(path.join(__dirname, 'assets')));
+app.use(express.static(path.join(__dirname, 'Assets')));
 app.use(express.static(path.join(__dirname,'public')));
 app.get("/",(req,res)=>{
     res.render('home_models',{cars})

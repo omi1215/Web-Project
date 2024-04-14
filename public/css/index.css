@@ -1,10 +1,150 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 
-
 body {
     font-family: 'Playfair Display', serif !important;
 }
+
+/* header css start */
+:root {
+  --bold: 'Oswald', sans-serif;
+  --abril: 'Abril Fatface', serif;
+  --serif: 'Playfair Display', serif;
+  --white: #ffffff;
+  --main: #92BFB1;
+  --dark: #333333;
+  --ease-slow: all .4s ease-out;
+}
+
+body {
+  margin: 0;
+  background: lighten(var(--main), 10%);
+}
+
+a {
+  text-decoration: none;
+  color: var(--main);
+}
+
+a:hover {
+  background: var(--main);
+  color: var(--dark);
+}
+
+.sticky {
+  position: fixed;
+  z-index: 10;
+}
+
+.navbar--container {
+  top: 10px;
+  left: 10px;
+  z-index: 9999;
+}
+
+.navbar--icon {
+  font-size: 1.5em;
+  color: black;
+  cursor: pointer;
+}
+
+.navbar--icon:hover {
+  color: var(--dark);
+}
+
+.navbar-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff; /* Adjust as needed */
+  padding: 10px 20px; /* Adjust padding as needed */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Example shadow, adjust as needed */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px; /* Fixed height for the navbar */
+  z-index: 9999; /* Ensure it appears above other content */
+}
+
+
+.navbar--icon {
+  cursor: pointer;
+}
+
+.navbar--logo img {
+  width: 200px; /* Adjust the width as needed */
+  height: auto; /* Let the height adjust proportionally */
+}
+
+
+.navbar--user {
+  cursor: pointer;
+}
+
+.navbar--title {
+  margin-left: 27px;
+  margin-top: 35px;
+}
+
+.navbar--title h4 {
+  writing-mode: vertical-rl;
+  font-family: var(--bold);
+  letter-spacing: .34em;
+  text-transform: uppercase;
+  font-size: 0.9em;
+}
+
+.nav--open, .nav--open2 {
+  max-height: 100%;
+  overflow-y: auto; 
+  width: 300px;
+  background: var(--white);
+  transition: var(--ease-slow);
+  opacity: 1;
+  box-shadow: 2px 2px 15px rgba(var(--dark), .1);
+  height: 100vh; /* Change menu height to take the whole page */
+  margin-top: 50px; /* Adjust as needed to prevent overlap with the navbar wrapper */
+}
+
+.nav--open-icon, .nav--open-icon2 {
+  text-align: right;
+  padding: 20px;
+}
+
+.nav--open-icon i, .nav--open-icon2 i {
+  font-size: 1.8em;
+  color: black;
+}
+
+.nav--open-icon i:hover , .nav--open-icon2 i:hover{
+  color: var(--dark);
+  cursor: pointer;
+}
+.nav--open-menu {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 0;
+}
+
+.nav--open-menu a{
+  font-size: 1.5em; /* Decrease font size */
+  font-weight: 100;
+  font-family: var(--serif);
+  padding: 15px 0;
+  color: black; /* Change font color */
+}
+
+.close {
+  transform: translateX(-300px);
+  transition: var(--ease-slow);
+  opacity: 0;
+  
+}
+/* header css end */
+
 .Models_heading{
    font-weight: bolder;
    font-size: xx-large;
@@ -118,4 +258,5 @@ body {
     }
     
   }
+  
   
