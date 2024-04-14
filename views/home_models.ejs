@@ -9,12 +9,42 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/css/footer.css">
 </head>
 <body>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/index.js"></script>
 
     <%- include('./partials/header.ejs')  %>
+    
+    <div class="video-container">
+        <video id="porsche-video" class="video" loop autoplay muted>
+            <source src="/porsche-video/vid.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <button id="stopButton"><i id="icon" class="fas fa-pause"></i></button>
+    </div>
+
+    <div class="container offers-section">
+        <% for (let i = 0; i < offers.length; i += 3) { %>
+            <div class="row">
+                <% for (let j = i; j < i + 3 && j < offers.length; j++) { %>
+                    <div class="col-sm-12 col-md-6 col-lg-4 mb-4"> <!-- Added mb-4 class for margin-bottom -->
+                        <div class="card offer-card position-relative" style="border-radius: 20px;">
+                            <img src="<%= offers[j].image %>" class="card-img-top" alt="Offer Image">
+                            <div class="card-body position-absolute bottom-0 start-0 end-0" style="background-color: rgba(0, 0, 0, 0.5);">
+                                <p class="card-text text-white" style="font-size: 1.2rem;"><%= offers[j].description %></p> 
+                                <button class="btn btn-transparent position-absolute top-0 end-0 m-3" style="border: none;"><i class="fas fa-arrow-right text-white"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+        <% } %>
+    </div>
+    
+    
+ 
 
     <div class="container">
         <div class="Models d-flex justify-content-center pt-lg-5">
@@ -73,6 +103,8 @@
          </div>
         </div>
      </div>
+
+     <%- include('./partials/footer.ejs')  %>
 </body>
 
 </html>

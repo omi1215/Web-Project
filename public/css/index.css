@@ -55,7 +55,7 @@ a:hover {
 .navbar-wrapper {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content:space-between;
   background-color: #fff; /* Adjust as needed */
   padding: 10px 20px; /* Adjust padding as needed */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Example shadow, adjust as needed */
@@ -103,8 +103,7 @@ a:hover {
   transition: var(--ease-slow);
   opacity: 1;
   box-shadow: 2px 2px 15px rgba(var(--dark), .1);
-  height: 100vh; /* Change menu height to take the whole page */
-  margin-top: 50px; /* Adjust as needed to prevent overlap with the navbar wrapper */
+  height: 100vh;
 }
 
 .nav--open-icon, .nav--open-icon2 {
@@ -145,9 +144,62 @@ a:hover {
 }
 /* header css end */
 
+.video-container {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 60px); /* Subtracting the height of the navbar */
+  margin-top: 60px; /* Height of the navbar */
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Adjusted property */
+}
+
+#stopButton {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.offers-section {
+  margin-top: 60px;
+}
+
+
+.offer-card {
+  overflow: hidden;
+  position: relative;
+  justify-content: space-between;
+  width: 100%; /* Adjust width as needed */
+}
+
+.offer-card .card {
+  width: 100%; }
+
+
+.offer-card:hover img {
+  transform: scale(1.15);
+  transition: all 1s;
+}
+
+.btn-transparent {
+  background-color: transparent;
+  border: none;
+}
+
+
 .Models_heading{
    font-weight: bolder;
    font-size: xx-large;
+   margin-top: 60px;
 }
 
 
@@ -259,4 +311,31 @@ a:hover {
     
   }
   
-  
+
+  @media (max-width: 1200px) {
+    .offer-card .card-text {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .offer-card .card-text {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .offer-card .card-text {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .offer-card .card-text {
+        font-size: 0.8rem;
+    }
+    
+    .mb-4 {
+        margin-bottom: 1rem; /* Added margin for smaller screens */
+    }
+}

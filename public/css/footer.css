@@ -1,0 +1,45 @@
+/* Custom CSS for the footer */
+footer {
+    background-color: black; /* Black background */
+    margin-top: 60px;
+}
+
+footer h5 {
+    color: #fff; /* White text for headings */
+    font-size: 1.5rem; /* Default font size for headings */
+}
+
+footer p,
+footer a {
+    color: #fff; /* White text for paragraphs and links */
+    font-size: 1rem; /* Default font size for paragraphs and links */
+}
+
+footer a:hover {
+    text-decoration: none; /* Remove underline on hover */
+}
+
+/* Additional styling for the social media icons */
+footer .list-inline-item a i {
+    color: #fff; /* White color for the icons */
+    font-size: 24px; /* Adjust icon size */
+}
+
+@media (max-width: 990px) {
+    footer .container .row {
+        flex-direction: column; /* Stack items vertically */
+    }
+
+    footer .col-md-4 {
+        margin-bottom: 20px; /* Add margin between columns */
+    }
+
+    footer h5 {
+        font-size: 1.5rem; /* Increase font size for headings */
+    }
+
+    footer p,
+    footer a {
+        font-size: 1rem; /* Increase font size for paragraphs and links */
+    }
+}

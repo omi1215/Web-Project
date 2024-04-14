@@ -25,4 +25,28 @@ document.addEventListener('DOMContentLoaded', function() {
     close2.addEventListener('click', function() {
       menu2.classList.toggle('close');
     });
+
+    var video = document.getElementById('porsche-video');
+    var button = document.getElementById('stopButton');
+    var icon = document.getElementById('icon');
+    var muteButton = document.getElementById('muteButton');
+    
+   
+    video.addEventListener('play', function() {
+        icon.classList.remove('fa-play'); 
+        icon.classList.add('fa-pause');
+    });
+    
+    video.addEventListener('pause', function() {
+        icon.classList.remove('fa-pause'); 
+        icon.classList.add('fa-play');
+    });
+    
+    button.addEventListener('click', function() {
+        if (video.paused) {
+            video.play(); 
+        } else {
+            video.pause(); 
+        }
+    });
 });
