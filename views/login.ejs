@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="icon" type="images/x-icon" href="./Porsche_logo_PNG2.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/login.css">
+    <script src="/js/login.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="image"></div>
+        <div class="login">
+            <center>
+                <img id="logo" src="/login-pic/1713025986077.png" height="300px" width="300px">
+                <br>
+                <form id="signinform">
+                    <input type="text" placeholder="Email" required
+                        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"><br>
+                    <input type="password" placeholder="Password" required><br>
+                    <input type="submit" value="Continue" onclick="validateForm()"
+                        style="font-family:'Playfair Display'">
+                </form>
+                <div id="sign-up">
+                    <h3>Don't have an account?</h3>
+                    <a href="/signup">Sign up</a>
+                </div>
+            </center>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

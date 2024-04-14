@@ -1,0 +1,15 @@
+  .playfair-display {
+      font-family: "Playfair Display", serif;
+      font-weight: 400;
+      /* or 700 for bold */
+      font-style: normal;
+  }
+
+  body {
+      font-family: 'Playfair Display', serif;
+  }
+
+  input {
+      height: 50px;
+
+  }
