@@ -1,4 +1,6 @@
 const express = require('express');
+const port = 3000;
+const bodyParser = require('body-parser');
 const app = express();
 const cars = require('./models');
 const offers = require('./offers');
@@ -18,6 +20,22 @@ app.get("/login", (req, res) => {
 app.get("/signup", (req, res) => {
     res.render('signup')
 })
+
+app.use(bodyParser.json());
+
+
+app.post('/signup', (req, res) => {
+    console.log("inside post");
+    console.log(req.body);
+    const { first_name, last_name , email  } = req.body;
+
+  
+    console.log('Received sign-up data:', { first_name, last_name , email  });
+
+    
+    res.status(200).json({ message: 'User signed up successfully' });
+});
+
 
 app.listen(5000, () => {
     console.log("server started at http://localhost:5000");

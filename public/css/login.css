@@ -56,14 +56,7 @@ body {
     border-radius: 3px;
 }
 
-#emaill {
-    width: 70%;
-    padding: 10px;
-    margin-bottom: 10px;
-    margin-top: 30px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-}
+
 
 .login input[type="submit"] {
     background-color: #383838;
