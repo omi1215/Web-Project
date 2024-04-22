@@ -41,7 +41,9 @@ app.post('/signup', (req, res) => {
     });
 });
 
-
+app.get("/forgotpassword", (req, res) => {
+    res.render('forgotpassword')
+})
 
 app.listen(5000, () => {
     console.log("server started at http://localhost:5000");
