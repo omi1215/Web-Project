@@ -39,6 +39,7 @@ app.post('/signup', (req, res) => {
         first_name: first_name,
         last_name: last_name
     });
+
 });
 
 app.get("/forgotpassword", (req, res) => {
