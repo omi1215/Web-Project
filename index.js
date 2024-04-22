@@ -25,16 +25,22 @@ app.use(bodyParser.json());
 
 
 app.post('/signup', (req, res) => {
-    console.log("inside post");
-    console.log(req.body);
-    const { first_name, last_name , email  } = req.body;
+    console.log("Received sign-up data:", req.body);
+    const { first_name, last_name, email } = req.body;
 
-  
-    console.log('Received sign-up data:', { first_name, last_name , email  });
+    // Process the received form data (e.g., save to database)
 
-    
-    res.status(200).json({ message: 'User signed up successfully' });
+    console.log('First Name:', first_name);
+    console.log('Last Name:', last_name);
+
+    // Send a response back to the client with the processed data
+    res.status(200).json({
+        message: 'User signed up successfully',
+        first_name: first_name,
+        last_name: last_name
+    });
 });
+
 
 
 app.listen(5000, () => {
