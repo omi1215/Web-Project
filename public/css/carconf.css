@@ -118,3 +118,77 @@
         width: 70%;
     }
 }
+@media (min-widht:556px) and (max-width: 768px) {
+    .car-header {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .car-name {
+        font-size: 2.75rem;
+
+    }
+
+    .car-price {
+        display: none;
+    }
+    .features{
+        max-height: 60;
+    }
+    .car-body-features{
+        display: flex;
+        flex-direction: column;
+
+    }
+    .features{
+        flex: 0 0 100%;
+    }
+    .car-pic{
+        flex: 0 0 100%;
+    }
+    .carousel-inner{
+        height: 70vh;
+
+    }
+    .rims{
+        width: 50%;
+    }
+    
+}
+@media (max-width: 555px) {
+    .car-header {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .car-name {
+        font-size: 2.75rem;
+
+    }
+
+    .car-price {
+        display: none;
+    }
+    .features{
+        max-height: 60;
+    }
+    .car-body-features{
+        display: flex;
+        flex-direction: column;
+
+    }
+    .features{
+        flex: 0 0 100%;
+    }
+    .car-pic{
+        flex: 0 0 100%;
+    }
+    .carousel-inner{
+        height: 25vh;
+
+    }
+    .rims{
+        width: 50%;
+    }
+    
+}
