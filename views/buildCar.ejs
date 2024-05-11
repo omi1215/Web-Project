@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Build Your Porsche</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/carconf.css" />
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pzjw8f+ua7Kw1TIq0v8FqFjcJ6pajs/rfdfs3SO+kD4Ck5BdPtF+to8xM6B5z6W5"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+
+    <%- include('./partials/header.ejs')  %>
+
+    <div class="car-header">
+      <div class="car-name"><%= car.name %></div>
+      <div class="car-price mt-3">$<%= car.price %></div>
+    </div>
+    <div class="car-body-features">
+      <div class="car-pic">
+        <div class="container-fluid imagecontainer">
+          <div
+            id="carouselExampleFade"
+            class="carousel slide carousel-fade"
+            data-bs-ride="carousel"
+          >
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img
+                  src="/HomeModels/718.jpg"
+                  class="d-block w-100"
+                  alt="..."
+                />
+              </div>
+              <div class="carousel-item">
+                <img
+                  src="/HomeModels/911.jpg"
+                  class="d-block w-100"
+                  alt="..."
+                />
+              </div>
+              <div class="carousel-item">
+                <img
+                  src="/HomeModels/718.jpg"
+                  class="d-block w-100"
+                  alt="..."
+                />
+              </div>
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExampleFade"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExampleFade"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="features">
+        <div class="card" style="width: 18rem">
+          <h6
+            class="card-title mt-3 feature-title"
+           
+          >
+            Exterior Colors
+          </h6>
+          <div class="card-body">
+            <div class="d-grid gap-2 mx-auto">
+              <h5 class="card-title" style="font-weight: 600">
+                Standard Colors
+              </h5>
+              <button
+                class="btn color-btn"
+                type="button"
+                style="color: rgb(171, 161, 161)"
+              ></button>
+              <h6 class="card-subtitle mb-2 color-sub">White</h6>
+              <button class="btn btn-dark color-btn" type="button"></button>
+              <h6 class="card-subtitle mb-2 color-sub">Black</h6>
+              <button class="btn btn-warning color-btn" type="button"></button>
+              <h6 class="card-subtitle mb-2 color-sub">Yellow</h6>
+              <button class="btn btn-danger color-btn" type="button"></button>
+              <h6 class="card-subtitle mb-2 color-sub">Red</h6>
+           
+            </div>
+          </div>
+        </div>
+        <div class="card mt-3" style="width: 18rem;">
+          <h5 class="card-title feature-title mt-3" >Wheels</h5>
+          <div class="card-body ">
+           <img src="/rims/testrim.jpg" alt="not loaded" class="card-title rims">
+           <h6 class="card-subtitle color-sub">18" Boxter Wheels</h6>
+           <img src="/rims/testrim.jpg" alt="not loaded" class="card-title rims mt-3" width="100%">
+           <h6 class="card-subtitle color-sub">18" Cayman Wheels</h6>
+           <img src="/rims/testrim.jpg" alt="not loaded" class="card-title rims mt-3" width="100%">
+           <h6 class="card-subtitle color-sub">19" Boxster S Wheels</h6>
+           <img src="/rims/testrim.jpg" alt="not loaded" class="card-title rims mt-3" width="100%">
+           <h6 class="card-subtitle color-sub">20" Carrera Sport Wheels</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mt-5" id="summary-div">
+      <div class="row">
+        <div class="col text-center">
+          <h1>Summary</h1>
+          <hr> <!-- Horizontal line below the Summary heading -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col text-left">
+              <h5>Base MSRP</h5>
+            </div>
+            <div class="col text-right">
+              <h5>$<%= car.price %></h5>
+            </div>
+          </div>
+          <hr> <!-- Horizontal line after the first row -->
+          <div class="row">
+            <div class="col text-left">
+              <h5>Price for Equipment</h5>
+            </div>
+            <div class="col text-right">
+              <h5>$<%= car.price %></h5>
+            </div>
+          </div>
+          <hr> <!-- Horizontal line after the second row -->
+          <div class="row">
+            <div class="col text-left">
+              <h5>Delivery Processing and Handling Fee</h5>
+            </div>
+            <div class="col text-right">
+              <h5>$<%= car.price %></h5>
+            </div>
+          </div>
+          <hr> <!-- Horizontal line after the third row -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col text-left">
+              <h3>Total MSRP*</h3>
+            </div>
+            <div class="col text-right">
+              <h3>$<%= car.price %></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    <%- include('./partials/footer.ejs') %>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

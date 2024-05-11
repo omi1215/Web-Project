@@ -66,7 +66,11 @@
                             </div>
                             <div class="row buttons">
                                 <div class="col-6 col-xl-12 col-xxl-12 mb-2 ">
-                                    <div class="btn btn-light btn-block buildbtn text-center">Build your <%= car.name %></div>
+
+                                    <a href="/buildcar?index=<%= index %>" id="buildbtna">
+                                        <div class="btn btn-light btn-block buildbtn text-center">Build your <%= car.name %></div>
+                                      </a>
+                                      
     
                                 </div>
                                 <div class="col-6 col-xl-12 col-xxl-12 mt-xl-1 mb-2 ">

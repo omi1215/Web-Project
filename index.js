@@ -14,6 +14,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get("/", (req, res) => {
     res.render('index', { cars, offers })
 })
+
+app.get("/buildcar", (req, res) => {
+    var index=req.query.index
+    var car = cars[index];
+    console.log(car);
+    res.render('buildCar', {car:car});
+});
 app.get("/login", (req, res) => {
     res.render('login')
 })
