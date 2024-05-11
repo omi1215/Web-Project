@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <script src="/js/admin.js"></script>
+</head>
+
+<body>
+    <%- include('./partials/header.ejs') %>
+        <div class="container-fluid mainbox">
+            <div class="options">
+                <div class="card" style="width: 100%;">
+                    <div class="card-header ">
+                        <h3 class="card-title ">Admin Dashboard</h3>
+
+                    </div>
+                    <div class="card-body ">
+                        <h6 class="card-subtitle " id="showerror"></h6>
+                        <div class="d-grid gap-2 col-12 ">
+                            <button class="btn btn-outline-dark " type="button" id="cuser">Create User</button>
+                            <button class="btn btn-outline-dark" type="button" id="updateUserBtn">Update User</button>
+                            <button class="btn btn-outline-dark" type="button" id="showUserBtn">Show Users</button>
+                            <button class="btn btn-outline-dark" type="button" id="delUserBtn">Delete User</button>
+                            <button class="btn btn-outline-dark" type="button">Create Car</button>
+                            <button class="btn btn-outline-dark" type="button">Update Car</button>
+                            <button class="btn btn-outline-dark" type="button">Show Cars</button>
+                            <button class="btn btn-outline-dark" type="button">Delete Car</button>
+                        </div>
+                        <hr class="my-4 ">
+                        <div class="container-fluid ">
+                            <h4 class="card-title text-center ">Total Sales</h4>
+                            <hr class="my-4 ">
+                            <div class="container-fluid  d-flex justify-content-between ">
+                                <h5>Revenue</h5>
+                                <h6 class="ammount">$184000</h6>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="edit " id="editContent">
+
+            </div>
+        </div>
+        </div>
+        <template id="editTemplate">
+            <div class="card" style="width: 100%;">
+                <div class="card-header ">
+                    <h3 class="card-title text-center ">Update User</h3>
+                </div>
+
+                <div class="d-flex justify-content-center align-items-center ">
+                    <div class="mb-3 card-body " style="padding-left: 1rem;">
+                        <label for="updateuser" class="form-label" id="update_email">Email address</label>
+                        <input type="email" class="form-control col-5 " id="updateuser" placeholder="name@gmail.com">
+
+                        <h5 class="card-title mt-4 ">Updated Data</h5>
+                        <div class="caption-top  mb-4 ">Only input Filds which you want to Update</div>
+                        <div class="mb-3 ">
+                            <label for="updateemail" class="form-label" id="updated_email">Updated Email address</label>
+                            <input type="email" class="form-control col-5 " id="updateemail"
+                                placeholder="name@gmail.com">
+                        </div>
+                        <div class="mb-3 ">
+                            <label for="updatepassword" class="form-label" id="updatepassword">Updated password</label>
+                            <input type="password" class="form-control col-5 " id="updatepassword">
+                        </div>
+                        <div class="mb-3 ">
+                            <label for="updatefirstname" class="form-label" id="updated_firstname">Updated First
+                                Name</label>
+                            <input type="text" class="form-control col-5 " id="updatefirstname">
+                        </div>
+                        <div class="mb-3 ">
+                            <label for="Middlename" class="form-label" id="Middlename">Updated Middle Name</label>
+                            <input type="text" class="form-control col-5 " id="Middlename">
+                        </div>
+                        <div class="mb-3 ">
+                            <label for="updatelastname" class="form-label" id="updated_lastname">Updated Last
+                                Name</label>
+                            <input type="text" class="form-control col-5 " id="updatelastname">
+                        </div>
+                        <button class="btn btn-outline-dark mt-2 col-5" type="submit">Submit</button>
+                    </div>
+                </div>
+        </template>
+        <template id="editshowuser">
+            <div class="card " style="width:100% ;">
+                <div class="card-header ">
+                    <h4 class="card-title text-center ">Show Users</h4>
+                </div>
+                <div style="padding-left: 1rem;">
+                    <div class="card-body ">
+                        <div class="mb-3 d-flex justify-content-evenly ">
+                            <label for="searchname" class="form-label" id="searchfname"
+                                style="margin-right: 0.25rem;">Search First Name </label>
+                            <input type="text" class="form-control col-3 " id="searchname"
+                                style="margin-right: 1.25rem;">
+
+                            <label for="searchemail" class="form-label" id="searchfname"
+                                style="margin-right: 0.25rem;">Search Email </label>
+                            <input type="email" class="form-control col-3 " id="searchname"
+                                placeholder="example@gmail.com" style="margin-right: 1.25rem;">
+                        </div>
+                        <div class="d-flex justify-content-center align-items-center ">
+
+                            <button class="btn btn-outline-dark col-5">Filter</button>
+                        </div>
+                        <div class="displaydata">
+                            <% users.forEach((users,index)=> { %>
+                                <div class="user" id="userdatadisplay">
+                                    <p><b>First Name:</b>
+                                        <%= users.firstname %>
+                                    </p>
+                                    <p><b>Middle Name:</b>
+                                        <%= users.middlename %>
+                                    </p>
+                                    <p> <b>Last Name:</b>
+                                        <%= users.lastname %>
+                                    </p>
+                                    <p> <b>Email:</b>
+                                        <%= users.email %>
+                                    </p>
+                                    <p> <b>Status:</b>
+                                        <%= users.status %>
+                                    </p>
+                                </div>
+                                <hr class="my-4 ">
+                                <% }); %>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </template>
+        <template id="editdeluser">
+            <div class="card ">
+                <div class="card-header ">
+                    <h4 class="card-title ">Delete User</h4>
+                </div>
+                <div class="card-body ">
+                    <div class="mb-3 card-body " style="padding-left: 1rem;">
+                        <label for="updateuser" class="form-label" id="update_email">Email address</label>
+                        <input type="email" class="form-control col-5 " id="updateuser" placeholder="name@gmail.com">
+                </div>
+                <div class="d-flex justify-content-center align-items-center ">
+                    <button class="btn btn-outline-dark " type="button">Delete </button>
+                </div>
+                <div id="deluser"></div>
+                
+            </div>
+        </template>
+</body>
+
+</html>

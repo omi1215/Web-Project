@@ -1,0 +1,38 @@
+.mainbox{
+    display: flex;
+   height: 100vh;
+   margin-top: 70px;
+}
+body::-webkit-scrollbar {
+    width: 0; /* For Chrome, Safari, and Opera */
+}
+.options{
+    
+    flex: 0 0 30% ;
+    height: 100%;
+ 
+}
+.edit{
+    flex: 0 0 70%;
+    height: 100%;
+    margin-left: 0.75rem;
+}
+body{
+    margin: 0;
+    padding: 0;
+}
+#update_email{
+    font-weight: bold;
+    font-size: large;
+}
+.default-text {
+    text-align: center;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(100%, -50%);
+    font-weight: bold;
+    font-size: xx-large;
+}
+

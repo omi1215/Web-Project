@@ -41,15 +41,6 @@ function validateForm() {
                 const data = await response.json();
                 console.log('Server Response:', data);
         
-                if (data.first_name && data.last_name) {
-                    console.log('Received First Name:', data.first_name);
-                    console.log('Received Last Name:', data.last_name);
-                    alert(`${data.first_name} ${data.last_name}, welcome to the Porsche Club!`);
-                } else {
-                    console.log('First Name or Last Name not provided by server');
-                }
-        
-                alert(data.message);
             } catch (error) {
                 console.error('Error:', error.message);
                 alert('An error occurred while signing up');

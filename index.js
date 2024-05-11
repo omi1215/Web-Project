@@ -5,15 +5,38 @@ const app = express();
 const cars = require('./models');
 const offers = require('./offers');
 const path = require('path')
-
+const User =require('./backend/mongoinit')
+const mongoose = require('mongoose')
+mongoose.connect('mongodb://localhost:27017/Porchse')
+const db=mongoose.connection;
+db.on('error',console.error.bind(console,'Connection error : '));
+db.once('open',function(){
+    console.log('connected to Mongo DB');
+})
 
 app.set('view engine', 'ejs');
 app.set('views', './views')
 app.use(express.static(path.join(__dirname, 'Assets')));
 app.use(express.static(path.join(__dirname, 'public')));
-app.get("/", (req, res) => {
-    res.render('index', { cars, offers })
-})
+
+
+// app.get("/", (req, res) => {
+//     res.render('index', { cars, offers })
+// })
+// Route to fetch user data from MongoDB and render admin page
+// Route to fetch user data from MongoDB and render admin page
+app.get("/", async (req, res) => {
+    try {
+        const users = await User.find({}).lean(); // Fetch users data from MongoDB
+        console.log('All Users : ', users);
+        res.render('admin', { users }); // Pass users data to the admin view
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+
 
 app.get("/buildcar", (req, res) => {
     var index=req.query.index
@@ -32,13 +55,11 @@ app.use(bodyParser.json());
 
 
 app.post('/signup', (req, res) => {
-    console.log("Received sign-up data:", req.body);
-    const { first_name, last_name, email } = req.body;
+    const { salutation,first_name, last_name,middle_name, email,password } = req.body;
 
     // Process the received form data (e.g., save to database)
 
-    console.log('First Name:', first_name);
-    console.log('Last Name:', last_name);
+    console.log(req.body);
 
     // Send a response back to the client with the processed data
     res.status(200).json({
