@@ -52,7 +52,10 @@ app.post('/signup', (req, res) => {
 app.get("/forgotpassword", (req, res) => {
     res.render('forgotpassword')
 })
-
+app.get("/email_verify", (req, res) => {
+    const { email } = req.query;
+    res.render('email_verify', { email });
+});
 app.listen(5000, () => {
     console.log("server started at http://localhost:5000");
 })

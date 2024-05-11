@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verification</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/bootstrap.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+
+       
+
+        body {
+            font-family: 'Playfair Display', serif !important;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .Check_inbox{
+            font-size: 1rem;
+        }
+        .email_card {
+            border-radius: 20px;
+            margin-left: 20rem;
+            margin-right: 20rem;
+            border: 2px solid black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: start;
+        }
+        .verify_haeading{
+            font-weight: bolder;
+            font-size: 1.5rem;
+            color: black;
+        }
+
+        #verify_email{
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        .resend{
+            height: 2rem;
+            padding: 5px;
+            padding-left: 2rem;
+            padding-right: 2rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .image_cn{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class=" container-fluid email_card">
+        <div class="container-sm image_cn"><img src="/login-pic/1713025986077.png" alt="Porcche" width="250rem" id="porche_logo"></div>
+        <div class="verify_haeading">Verify Email</div>
+        <div class="Check_inbox">An Email has been sent to your account : . </div>
+        <div id="verify_email"> Please verify your email!</div>
+        <button type="button" class="btn btn-dark resend">Re-send Email</button>
+    </div>
+</body>
+
+</html>
