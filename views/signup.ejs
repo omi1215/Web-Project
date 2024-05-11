@@ -78,6 +78,20 @@
                                 Please enter a valid email address.
                             </div>
                         </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password:</label>
+                            <input name="password" type="password" class="form-control" id="password" placeholder="Enter your password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
+                            <div class="invalid-feedback">
+                                Please enter a valid password. The password must contain:
+                                <ul>
+                                    <li>At least 8 characters</li>
+                                    <li>At least one uppercase letter</li>
+                                    <li>At least one lowercase letter</li>
+                                    <li>At least one digit</li>
+                                    <li>At least one special character (@, $, !, %, *, ?, &)</li>
+                                </ul>
+                            </div>
+                        </div>
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="privacy" required>
                             <label class="form-check-label" for="privacy">I have read the data privacy
