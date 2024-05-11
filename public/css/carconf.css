@@ -61,6 +61,7 @@
     height: 100%; 
    
 }
+
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
    filter: invert(1) 
@@ -97,5 +98,23 @@
     }
     .features{
         max-height: 60;
+    }
+    .car-body-features{
+        display: flex;
+        flex-direction: column;
+
+    }
+    .features{
+        flex: 0 0 100%;
+    }
+    .car-pic{
+        flex: 0 0 100%;
+    }
+    .carousel-inner{
+        height: 50vh;
+
+    }
+    .rims{
+        width: 70%;
     }
 }
