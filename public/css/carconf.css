@@ -34,7 +34,7 @@
 .features {
     flex: 0 0 25%;
     background: transparent;
-    max-height: 27rem;
+    max-height: 83vh;
     overflow-y: auto;
     -ms-overflow-style:none;
     scrollbar-width: none;
@@ -66,7 +66,7 @@
    filter: invert(1) 
 }
 .carousel-inner {
-    height: 27rem;
+    height: 83vh;
     border-radius: 15px;
 }
 .color-btn{
@@ -94,5 +94,8 @@
 
     .car-price {
         display: none;
+    }
+    .features{
+        max-height: 60;
     }
 }
