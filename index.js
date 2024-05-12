@@ -391,8 +391,9 @@ app.post('/admin/deleteuser', async (req, res) => {
 app.get("/buildcar", (req, res) => {
     const index = req.query.index;
     const car = cars[index];
-    res.render('buildCar', { car }).send(car);
+    res.render('buildCar', { car });
 });
+app.post('/buildcar')
 app.get("/login", (req, res) => {
     res.render('login');
 });
