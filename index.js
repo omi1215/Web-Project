@@ -5,13 +5,13 @@ const mongoose = require('mongoose');
 const User = require('./backend/mongoinit');
 const Car=require('./backend/carschema')
 const order=require('./backend/orderschema')
-const cars = require('./models');
+const getCarsFromDB = require('./models');
 const offers = require('./offers');
 const bcrypt=require('bcryptjs')
 const multer  = require('multer')
 const app = express();
 const port = 5000;
-
+var cars;
 mongoose.connect('mongodb://localhost:27017/Porchse', { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
@@ -28,7 +28,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+(async () => {
+    try {
+        cars = await getCarsFromDB();
+        console.log(cars); // Now you have global access to the cars array
+    } catch (error) {
+        console.error('Error:', error);
+    }
+})();
 app.get('/',(req,res)=>{
+    console.log(cars);
     res.render('index',{cars,offers});
 })
 

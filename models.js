@@ -1,39 +1,30 @@
-const cars =[
-    {
-        name:"718",
-        description:"The mid-engine sports car for two made for pure driving pleasure.",
-        price:'68,300',
-        image:'/HomeModels/718.jpg'
-    },
-    {
-        name:"911",
-        description:"The iconic, rear-engine sports car with exceptional performance.",
-        price:'114,400',
-        image:'/HomeModels/911.jpg'
-    },
-    {
-        name:"Taycan",
-        description:"Coming Summer 2024: the pure expression of an electric sports car.",
-        price:'99,400',
-        image:'/HomeModels/taycan.jpg'
-    },
-    {
-        name:"Panamera",
-        description:"The sports car sedan for an active lifestyle with highest comfort.",
-        price:'102,800',
-        image:'/HomeModels/panamera.jpg'
-    },
-    {
-        name:"Macan",
-        description:"All-electric SUV with impressive E-Performance",
-        price:'78,800',
-        image:'/HomeModels/macan.jpg'
-    },
-    {
-        name:"Cayenne",
-        description:"The versatile SUV with sports car performance and up to five seats",
-        price:'79,200',
-        image:'/HomeModels/Cayenne.jpg'
-    }
-]
-module.exports=cars
+// Import mongoose and your Car model
+const mongoose = require('mongoose');
+const Car = require('./backend/carschema'); // Update the path accordingly
+
+// Connect to MongoDB
+mongoose.connect('mongodb://localhost:27017/Porchse', { useNewUrlParser: true, useUnifiedTopology: true });
+
+// Function to retrieve cars from MongoDB and export them
+async function getCarsFromDB() {
+  try {
+    // Retrieve all cars from the database
+    const carsFromDB = await Car.find({});
+
+    // Map the retrieved cars to match the format of your hardcoded data
+    const mappedCars = carsFromDB.map(car => ({
+      name: car.name,
+      description: car.desc,
+      price: car.price.toString(), // Convert price to string if necessary
+      image: car.image
+    }));
+
+    // Export the mapped cars directly
+    return mappedCars;
+  } catch (error) {
+    console.error('Error retrieving cars from MongoDB:', error);
+    throw error; // Rethrow the error to handle it in index.js if needed
+  }
+}
+
+module.exports = getCarsFromDB;
