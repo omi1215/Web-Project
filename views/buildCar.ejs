@@ -8,6 +8,7 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <script src="/js/buildcar.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -38,9 +39,14 @@
     ></script>
   </head>
   <body>
-
     <%- include('./partials/header.ejs')  %>
 
+
+    <script>
+      // Decode HTML entity-encoded characters and pass the car object to buildcar.js
+      const carData = '<%= car %>';
+  </script>
+  
     <div class="car-header">
       <div class="car-name"><%= car.name %></div>
       <div class="car-price mt-3">$<%= car.price %></div>
@@ -56,21 +62,21 @@
             <div class="carousel-inner">
               <div class="carousel-item active">
                 <img
-                  src="/HomeModels/718.jpg"
+                  src="<%= car.front.split('Assets')[1] %>"
                   class="d-block w-100"
                   alt="..."
                 />
               </div>
               <div class="carousel-item">
                 <img
-                  src="/HomeModels/911.jpg"
+                  src="<%= car.side.split('Assets')[1] %>"
                   class="d-block w-100"
                   alt="..."
                 />
               </div>
               <div class="carousel-item">
                 <img
-                  src="/HomeModels/718.jpg"
+                  src="<%= car.back.split('Assets')[1] %>"
                   class="d-block w-100"
                   alt="..."
                 />
@@ -119,14 +125,15 @@
               <button
                 class="btn color-btn"
                 type="button"
+                id="whitecolor"
                 style="color: rgb(171, 161, 161)"
               ></button>
-              <h6 class="card-subtitle mb-2 color-sub">White</h6>
-              <button class="btn btn-dark color-btn" type="button"></button>
+              <h6 class="card-subtitle mb-2 color-sub" >White</h6>
+              <button class="btn btn-dark color-btn" type="button" id="blackcolor"></button>
               <h6 class="card-subtitle mb-2 color-sub">Black</h6>
-              <button class="btn btn-warning color-btn" type="button"></button>
+              <button class="btn btn-warning color-btn" type="button" id="yellowcolor"></button>
               <h6 class="card-subtitle mb-2 color-sub">Yellow</h6>
-              <button class="btn btn-danger color-btn" type="button"></button>
+              <button class="btn btn-danger color-btn" type="button" id="redcolor"></button>
               <h6 class="card-subtitle mb-2 color-sub">Red</h6>
            
             </div>
@@ -135,13 +142,13 @@
         <div class="card mt-3" style="width: 100%;">
           <h5 class="card-title feature-title mt-3" >Wheels</h5>
           <div class="card-body ">
-           <img src="/rims/testrim.jpg" alt="not loaded" class="card-title rims">
+           <img src="/rims/testrim.jpg" alt="not loaded" class="card-title rims" id="boxter1">
            <h6 class="card-subtitle color-sub">18" Boxter Wheels</h6>
-           <img src="/rims/testrim.jpg" alt="not loaded" class="card-title rims mt-3" width="100%">
+           <img src="/rims/testrim.jpg" alt="not loaded" class="card-title rims mt-3" width="100%" id="cayman1"> 
            <h6 class="card-subtitle color-sub">18" Cayman Wheels</h6>
-           <img src="/rims/testrim.jpg" alt="not loaded" class="card-title rims mt-3" width="100%">
+           <img src="/rims/testrim.jpg" alt="not loaded" class="card-title rims mt-3" width="100%" id="boxter2">
            <h6 class="card-subtitle color-sub">19" Boxster S Wheels</h6>
-           <img src="/rims/testrim.jpg" alt="not loaded" class="card-title rims mt-3" width="100%">
+           <img src="/rims/testrim.jpg" alt="not loaded" class="card-title rims mt-3" width="100%" id="carera">
            <h6 class="card-subtitle color-sub">20" Carrera Sport Wheels</h6>
           </div>
         </div>
@@ -171,7 +178,7 @@
               <h5>Price for Equipment</h5>
             </div>
             <div class="col text-right">
-              <h5>$<%= car.price %></h5>
+              <h5>$2500</h5>
             </div>
           </div>
           <hr> <!-- Horizontal line after the second row -->
@@ -180,7 +187,7 @@
               <h5>Delivery Processing and Handling Fee</h5>
             </div>
             <div class="col text-right">
-              <h5>$<%= car.price %></h5>
+              <h5>$1500</h5>
             </div>
           </div>
           <hr> <!-- Horizontal line after the third row -->
@@ -193,14 +200,15 @@
               <h3>Total MSRP*</h3>
             </div>
             <div class="col text-right">
-              <h3>$<%= car.price %></h3>
+              <h3 id="totalbill"></h3>
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    
+    <div style="display: flex; justify-content: center;align-items: center;">
+    <button class="btn btn-outline-dark col-2" id="buycar" >Buy</button>
+    </div>
     
     <%- include('./partials/footer.ejs') %>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

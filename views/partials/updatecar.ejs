@@ -1,0 +1,48 @@
+<form action="/admin/updatecar" method="post" enctype="multipart/form-data">
+    
+    <div class="mb-3 mt-3">
+        <label for="ucarname" class="form-label">Enter Car Name to be updated</label>
+        <input type="text" name="ucarname" class="form-control" id="ucarname" required>
+    </div>
+    <div class="mb-3">
+        <label for="carname" class="form-label">Car Name</label>
+        <input type="text" name="carname" class="form-control" id="carname" >
+    </div>
+    <div class="mb-3">
+        <label for="desc" class="form-label">Description</label>
+        <input type="text" name="desc" class="form-control" id="desc" >
+    </div>
+    <div class="mb-3">
+        <label for="price" class="form-label">Price</label>
+        <input type="text" name="price" class="form-control" id="price" >
+    </div>
+    <div class="mb-3">
+        <label for="cover" class="form-label">Cover Image</label>
+        <input type="file" name="cover" class="form-control" id="cover" >
+    </div>
+    <div class="mb-3">
+        <label for="front" class="form-label">Build Image (Front)</label>
+        <input type="file" name="front" class="form-control" id="front" >
+    </div>
+    <div class="mb-3">
+        <label for="side" class="form-label">Build Image (Side)</label>
+        <input type="file" name="side" class="form-control" id="side" >
+    </div>
+    <div class="mb-3">
+        <label for="back" class="form-label">Build Image (Back)</label>
+        <input type="file" name="back" class="form-control" id="back" >
+    </div>
+    <div class="mb-3">
+        <label for="power" class="form-label">Power</label>
+        <input type="text" name="power" class="form-control" id="power" >
+    </div>
+    <div class="mb-3">
+        <label for="time" class="form-label">0-60 MPH</label>
+        <input type="text" name="time" class="form-control" id="time" >
+    </div>
+    <div class="mb-3">
+        <label for="topspeed" class="form-label">Top Speed</label>
+        <input type="text" name="topspeed" class="form-control" id="topspeed" >
+    </div>
+    <button type="submit" id="createcar" class="mb-3 ">Submit</button>
+</form>
