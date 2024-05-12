@@ -6,6 +6,8 @@ const orderSchema = new mongoose.Schema({
     date:String,
     status:String,
     carname:String,
+    color:String,
+    rim:String,
 });
 
 const order = mongoose.model('order', orderSchema, 'orders'); // Specify the collection name as the third argument

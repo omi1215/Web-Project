@@ -16,7 +16,13 @@ async function getCarsFromDB() {
       name: car.name,
       description: car.desc,
       price: car.price.toString(), // Convert price to string if necessary
-      image: car.image
+      image: car.image,
+      front:car.front,
+      side:car.side,
+      back:car.back,
+      power:car.power,
+      time:car.time,
+      topspeed:car.topspeed
     }));
 
     // Export the mapped cars directly

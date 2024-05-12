@@ -12,6 +12,7 @@ const multer  = require('multer')
 const app = express();
 const port = 5000;
 var cars;
+var logined=0;
 mongoose.connect('mongodb://localhost:27017/Porchse', { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
@@ -31,13 +32,11 @@ app.use(express.urlencoded({ extended: true }));
 (async () => {
     try {
         cars = await getCarsFromDB();
-        console.log(cars); // Now you have global access to the cars array
     } catch (error) {
         console.error('Error:', error);
     }
 })();
 app.get('/',(req,res)=>{
-    console.log(cars);
     res.render('index',{cars,offers});
 })
 
@@ -68,7 +67,7 @@ app.use(calculateTotalAmount);
 
 app.get('/admin', async (req, res) => {
     try {
-        console.log(req.totalAmount);
+     
         res.render('admin', {
             template:'',
             totalAmount: req.totalAmount // Access totalAmount from the request object
@@ -308,13 +307,12 @@ app.get("/admin/updateuser",(req,res)=>{
 // Handle create user request
 app.post('/admin/showuser', async (req, res) => {
     const formData = req.body;
-   console.log(req.body);
+  
     // Process create user data
     res.sendStatus(200);
 });
 app.post('/admin/createUser', async (req, res) => {
     const formData = req.body;
-    console.log('Received create user data:', formData);
     // Process create user data
     res.sendStatus(200);
 });
@@ -393,10 +391,8 @@ app.post('/admin/deleteuser', async (req, res) => {
 app.get("/buildcar", (req, res) => {
     const index = req.query.index;
     const car = cars[index];
-    console.log(car);
-    res.render('buildCar', { car });
+    res.render('buildCar', { car }).send(car);
 });
-
 app.get("/login", (req, res) => {
     res.render('login');
 });
