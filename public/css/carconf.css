@@ -3,7 +3,6 @@
     display: flex;
     justify-content: space-between;
 }
-
 .car-name, .car-price {
     color: black;
     padding-left: 2rem;
@@ -118,6 +117,7 @@
         width: 70%;
     }
 }
+
 @media (min-widht:556px) and (max-width: 768px) {
     .car-header {
         flex-direction: column;

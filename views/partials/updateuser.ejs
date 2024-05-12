@@ -1,0 +1,31 @@
+    <form id="updateform" action="/admin/updateuser" method="POST">
+        <label for="updateuser" class="form-label" id="update_email">Email address</label>
+        <input type="email" class="form-control col-5" id="updateuser" name="updateuser" placeholder="name@gmail.com" required>
+        
+        <label for="updateemail" class="form-label" id="updated_email">Updated Email address</label>
+        <input type="email" name="updateemail" class="form-control col-5" id="updateemail" placeholder="name@gmail.com">
+        
+        <label for="updatepassword" class="form-label" id="updatepassword">Updated password</label>
+    <input type="password" name="updatepassword" class="form-control col-5" id="updatepassword" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
+    <div class="invalid-feedback" id="passwordError">
+        Please enter a valid password. The password must contain:
+        <ul>
+            <li>At least 8 characters</li>
+            <li>At least one uppercase letter</li>
+            <li>At least one lowercase letter</li>
+            <li>At least one digit</li>
+            <li>At least one special character (@, $, !, %, *, ?, &)</li>
+        </ul>
+    </div>
+        
+        <label for="updatefirstname" class="form-label" id="updated_firstname">Updated First Name</label>
+        <input type="text" name="updatefirstname" class="form-control col-5" id="updatefirstname">
+        
+        <label for="Middlename" class="form-label" id="Middlename">Updated Middle Name</label>
+        <input type="text" name="Middlename" class="form-control col-5" id="Middlename">
+        
+        <label for="updatelastname" class="form-label" id="updated_lastname">Updated Last Name</label>
+        <input type="text" name="updatelastname" class="form-control col-5" id="updatelastname">
+        
+        <button class="btn btn-outline-dark mt-2 col-5" id="update-btn" type="submit">Submit</button>
+    </form>
