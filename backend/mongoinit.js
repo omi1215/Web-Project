@@ -8,7 +8,8 @@ const userSchema = new mongoose.Schema({
     lastname: String,
     email: String,
     password: String,
-    status: String
+    status: String,
+    verified:Number,
 });
 
 const User = mongoose.model('User', userSchema, 'user'); // Specify the collection name as the third argument

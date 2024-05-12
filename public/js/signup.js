@@ -9,6 +9,7 @@ function toggleTitleInput() {
     }
 }
 
+
 function validateForm() {
     var salutation = document.getElementById("salutation").value;
     var firstName = document.getElementById("first-name").value;
@@ -23,7 +24,7 @@ function validateForm() {
         
             formData.forEach((value, key) => {
                 formObject[key] = value;
-            });
+            });     
         
             try {
                 const response = await fetch('/signup', {
