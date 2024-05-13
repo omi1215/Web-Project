@@ -9,8 +9,6 @@ const getCarsFromDB = require('./models');
 const offers = require('./offers');
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
-
-
 const bcrypt=require('bcryptjs')
 const multer  = require('multer')
 const app = express();
@@ -439,7 +437,7 @@ app.get("/signup", (req, res) => {
 
 const sendVerifyMail = async(firstname, email)=>{
     try{
-        const token = jwt.sign({ email, timestamp: Date.now() }, 'abc', { expiresIn: '1m' });
+        const token = jwt.sign({ email, timestamp: Date.now() }, 'abc', { expiresIn: '15m' });
         const transporter = nodemailer.createTransport({
             host : 'smtp.gmail.com',
             port: 587,
@@ -520,7 +518,7 @@ const verifyMail = async (req, res) => {
         
         // Check if the token is expired
         const currentTime = Date.now();
-        const expirationTime = decoded.timestamp + (1 * 60 * 1000); 
+        const expirationTime = decoded.timestamp + (15 * 60 * 1000); 
         console.log(`current time is ${currentTime}`);
         console.log(`expiration time is ${expirationTime}`);
         if (currentTime > expirationTime) {
