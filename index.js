@@ -57,6 +57,7 @@ const store = new MongoDBStore({
 
 
   app.use(session({
+    name: 'biscuit',
     secret: 'abc',
     resave: false,
     saveUninitialized: true,
@@ -568,6 +569,19 @@ app.post("/buildCar", (req, res) => {
         console.error("Error rendering order confirmation:", error);
         res.status(500).send("Error rendering order confirmation page");
     }
+});
+
+app.post('/logout', (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            console.error('Error destroying session:', err);
+            res.status(500).send('Failed to logout');
+        } else {
+            // Optionally, you can clear any session-related cookies
+            res.clearCookie('biscuit');
+            res.status(200).send('Logged out successfully');
+        }
+    });
 });
 
 

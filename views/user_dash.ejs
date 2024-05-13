@@ -45,16 +45,16 @@
             <div class="card-body">
                 <p><strong>Email:</strong> <%= email %></p>
             </div>
+            <button class="btn btn-outline-dark" id="signoutBtn">Sign Out</button>
         </div>
 
         <!-- Edit section -->
         <div class="card edit" id="editContent">
             <div class="card-body">
                 <h3>Profile Information</h3>
-                <!-- Update button -->
-                <button class="btn btn-primary mb-3" id="toggleUpdate">Update Information</button>
+ 
+                <button class="btn btn-outline-dark mb-3" id="toggleUpdate">Update Information</button>
 
-                <!-- Update form -->
                 <form id="updateForm" action="/user_dash" method="post">
                     <div class="form-group">
                     </div>
@@ -62,7 +62,7 @@
                         <label for="newEmail">New Email:</label>
                         <input type="email" class="form-control" id="newEmail" name="newEmail" placeholder="Enter new email">
                     </div>
-                    <button type="submit" class="btn btn-primary">Confirm Update</button>
+                    <button type="submit" class="btn btn-outline-dark">Confirm Update</button>
                 </form>
             </div>
         </div>
@@ -81,6 +81,24 @@
                 this.textContent = 'Update Information';
             }
         });
+    
+        document.getElementById('signoutBtn').addEventListener('click', function() {
+            fetch('/logout', {
+                method: 'POST', 
+                credentials: 'same-origin' 
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = "/"; 
+                } else {
+                    console.error('Failed to logout');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
     </script>
+    
 </body>
 </html>
