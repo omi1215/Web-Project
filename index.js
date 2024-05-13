@@ -40,10 +40,8 @@ app.use(express.urlencoded({ extended: true }));
     }
 })();
 app.get('/',(req,res)=>{
-    console.log(cars);
     res.render('index',{cars,offers});
 })
-
 // Define the middleware function to calculate the total amount
 const calculateTotalAmount = async (req, res, next) => {
     try {
@@ -410,6 +408,7 @@ const loginLoad = async(req,res)=>{
 const verifyLogin = async (req, res) => {
     try {
         const { email, password } = req.body; 
+        console.log(req.body);
         const userData = await User.findOne({ email: email });
         if (userData) {
             const passMatch = await bcrypt.compare(password, userData.password);
@@ -417,7 +416,7 @@ const verifyLogin = async (req, res) => {
                 if (userData.verified == 0) {
                     res.render('login', { message: 'Please verify your email' }); 
                 } else {
-                    res.redirect('/index'); 
+                    res.redirect('/'); 
                 }
             } else {
                 res.render('login', { message: "Email and password is incorrect" });
@@ -431,7 +430,6 @@ const verifyLogin = async (req, res) => {
     }
 }
 app.post('/login',verifyLogin);
-app.get('/',loginLoad);
 app.get('/login',loginLoad);
 
 app.get("/signup", (req, res) => {

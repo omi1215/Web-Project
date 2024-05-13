@@ -21,13 +21,17 @@
             <center>
                 <img id="logo" src="/login-pic/1713025986077.png" height="40%" width="40%">
                 <br>
-                <form id="signinform">
+                <form id="signinform" action="/login" method="post">
                     <input type="text" placeholder="Email" required
-                        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"><br>
-                    <input type="password" placeholder="Password" required><br>
+                        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" name="email"><br>
+                    <input type="password" placeholder="Password" name="password" required><br>
                     <input type="submit" value="Login In" onclick="validateForm()"
                         style="font-family:'Playfair Display'">
                 </form>
+                <% if (typeof message !== 'undefined') { %>
+                    <h6 style="color: red;"><%= message %></h6>
+                <% } %>
+              
                 <div id="forgot">
                     <a href="/forgotpassword">forgot password?</a>
                 </div>
