@@ -40,6 +40,7 @@ app.use(express.urlencoded({ extended: true }));
     }
 })();
 app.get('/',(req,res)=>{
+    console.log(cars);
     res.render('index',{cars,offers});
 })
 
@@ -73,8 +74,7 @@ app.get('/admin', async (req, res) => {
      
         res.render('admin', {
             template:'',
-            totalAmount: req.totalAmount,
-            car:cars,
+            totalAmount: req.totalAmount // Access totalAmount from the request object
         });
     } catch (error) {
         console.error("Error:", error);
@@ -86,14 +86,12 @@ app.get('/admin/createcar',(req,res)=>{
     res.render('admin', { 
         totalAmount: req.totalAmount ,
         template: 'createcar', 
-        car:cars,
     });
 })
 app.get('/admin/updatecar',(req,res)=>{
     res.render('admin', { 
         totalAmount: req.totalAmount ,
         template: 'updatecar', 
-        car:cars,
     });
 })
 const storage = multer.diskStorage({
@@ -190,7 +188,6 @@ app.get('/admin/deletecar',(req,res)=>{
     res.render('admin', { 
         totalAmount: req.totalAmount ,
         template: 'deletecar', 
-        car:cars,
     });
 })
 app.post('/admin/deletecar', async (req, res) => {
@@ -294,8 +291,7 @@ app.get("/admin/showuser", async (req, res) => {
             users, 
             template: 'showuser', 
             totalPages,
-            currentPage: page,
-            car:cars,
+            currentPage: page
         });
     } catch (error) {
         console.error(error);
@@ -305,10 +301,10 @@ app.get("/admin/showuser", async (req, res) => {
 
 
 app.get("/admin/deleteuser",(req,res)=>{
-    res.render('admin',{ totalAmount: req.totalAmount ,template:'deleteuser',car:cars,})
+    res.render('admin',{ totalAmount: req.totalAmount ,template:'deleteuser'})
 });
 app.get("/admin/updateuser",(req,res)=>{
-    res.render('admin',{ totalAmount: req.totalAmount ,template:'updateuser',car:cars,})
+    res.render('admin',{ totalAmount: req.totalAmount ,template:'updateuser'})
 });
 // Inside index.js
 
@@ -399,15 +395,47 @@ app.post('/admin/deleteuser', async (req, res) => {
 
 app.get("/buildcar", (req, res) => {
     const index = req.query.index;
-    res.render('buildCar', { cars,index });
+    const car = cars[index];
+    res.render('buildCar', { car });
 });
 app.post('/buildcar')
-app.get("/login", (req, res) => {
-    res.render('login',{car:cars,});
-});
+
+const loginLoad = async(req,res)=>{
+    try{
+   res.render('login');}
+   catch(error){
+    console.log(error.message);
+   }
+}
+const verifyLogin = async (req, res) => {
+    try {
+        const { email, password } = req.body; 
+        const userData = await User.findOne({ email: email });
+        if (userData) {
+            const passMatch = await bcrypt.compare(password, userData.password);
+            if (passMatch) {
+                if (userData.verified == 0) {
+                    res.render('login', { message: 'Please verify your email' }); 
+                } else {
+                    res.redirect('/index'); 
+                }
+            } else {
+                res.render('login', { message: "Email and password is incorrect" });
+            }
+        } else {
+            res.render('login', { message: "Email and password is incorrect" });
+        }
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).send('Internal Server Error');
+    }
+}
+app.post('/login',verifyLogin);
+app.get('/',loginLoad);
+app.get('/login',loginLoad);
 
 app.get("/signup", (req, res) => {
-    res.render('signup',{car:cars,});
+    res.render('signup');
 });
 
 const sendVerifyMail = async(firstname, email)=>{
@@ -497,12 +525,12 @@ const verifyMail = async (req, res) => {
 app.get("/email_verified", verifyMail);
 
 app.get("/forgotpassword", (req, res) => {
-    res.render('forgotpassword',{car:cars,});
+    res.render('forgotpassword');
 });
 
 app.get("/email_verify", (req, res) => {
     const { email } = req.query;
-    res.render('email_verify', { email,car:cars, });
+    res.render('email_verify', { email });
 });
 
 app.listen(port, () => {
