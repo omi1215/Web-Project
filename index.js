@@ -8,6 +8,7 @@ const order=require('./backend/orderschema')
 const getCarsFromDB = require('./models');
 const offers = require('./offers');
 const nodemailer = require('nodemailer');
+const jwt = require('jsonwebtoken');
 
 
 const bcrypt=require('bcryptjs')
@@ -433,11 +434,12 @@ app.post('/login',verifyLogin);
 app.get('/login',loginLoad);
 
 app.get("/signup", (req, res) => {
-    res.render('signup');
+    res.render('signup',{cars:cars});
 });
 
 const sendVerifyMail = async(firstname, email)=>{
     try{
+        const token = jwt.sign({ email, timestamp: Date.now() }, 'abc', { expiresIn: '1m' });
         const transporter = nodemailer.createTransport({
             host : 'smtp.gmail.com',
             port: 587,
@@ -452,7 +454,7 @@ const sendVerifyMail = async(firstname, email)=>{
             from: 'f219272@cfd.nu.edu.pk',
             to: email,
             subject: 'Email verification',
-            html: '<p> Hi '+firstname+'!, please click here to <a href="http://localhost:5000/email_verified?email='+email+'"> verify </a> your email </p>.'
+            html: '<p> Hi '+firstname+'!, please click here to <a href="http://localhost:5000/email_verified?email='+email+'&token='+token+'"> verify </a> your email </p>.'
         }
         transporter.sendMail(mailOptions, function(error, info){
             if(error){
@@ -510,15 +512,43 @@ app.post('/signup', async (req, res) => {
 
 
 const verifyMail = async (req, res) => {
+    var em;
     try {
-        const { email } = req.query;
+        const {email,token}=req.query;
+        em=email;
+        const decoded = jwt.verify(token, 'abc');
+        
+        // Check if the token is expired
+        const currentTime = Date.now();
+        const expirationTime = decoded.timestamp + (1 * 60 * 1000); 
+        console.log(`current time is ${currentTime}`);
+        console.log(`expiration time is ${expirationTime}`);
+        if (currentTime > expirationTime) {
+           
+            return res.status(400).send('Verification link has expired. Please request a new one.');
+        }
+
+        // Proceed with the verification process
         const updateInfo = await User.updateOne({ email }, { $set: { verified: 1 } });
-        console.log(updateInfo);
-        res.render('email_verified'); 
+        res.render('email_verified');
     } catch (error) {
-        console.log(error.message);
+       
+        if(error.message=='jwt expired'){
+            try{
+
+                const user = await User.findOne({ email: em });
+                if(!user){return res.status(404)}
+                await User.deleteOne({ email: em });
+                }catch(error){
+                    console.log("error deleting user ");
+                    return res.status(400).send('Try different email or contact our helpline porchse@gmail.com');
+                }
+         return res.status(500).send('Email expired');
+        }
+        return res.status(500).send('Internal Server Error');
     }
-}
+};
+
 
 app.get("/email_verified", verifyMail);
 
