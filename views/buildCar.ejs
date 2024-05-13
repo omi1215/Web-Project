@@ -44,9 +44,11 @@
 
     <script>
       // Decode HTML entity-encoded characters and pass the car object to buildcar.js
-      const carData = '<%= car %>';
+      const carData = '<%= cars %>';
   </script>
-  
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/index.js"></script>
+    <% const car = cars[index]; %> 
     <div class="car-header">
       <div class="car-name"><%= car.name %></div>
       <div class="car-price mt-3">$<%= car.price %></div>

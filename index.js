@@ -73,7 +73,8 @@ app.get('/admin', async (req, res) => {
      
         res.render('admin', {
             template:'',
-            totalAmount: req.totalAmount // Access totalAmount from the request object
+            totalAmount: req.totalAmount,
+            car:cars,
         });
     } catch (error) {
         console.error("Error:", error);
@@ -85,12 +86,14 @@ app.get('/admin/createcar',(req,res)=>{
     res.render('admin', { 
         totalAmount: req.totalAmount ,
         template: 'createcar', 
+        car:cars,
     });
 })
 app.get('/admin/updatecar',(req,res)=>{
     res.render('admin', { 
         totalAmount: req.totalAmount ,
         template: 'updatecar', 
+        car:cars,
     });
 })
 const storage = multer.diskStorage({
@@ -187,6 +190,7 @@ app.get('/admin/deletecar',(req,res)=>{
     res.render('admin', { 
         totalAmount: req.totalAmount ,
         template: 'deletecar', 
+        car:cars,
     });
 })
 app.post('/admin/deletecar', async (req, res) => {
@@ -290,7 +294,8 @@ app.get("/admin/showuser", async (req, res) => {
             users, 
             template: 'showuser', 
             totalPages,
-            currentPage: page
+            currentPage: page,
+            car:cars,
         });
     } catch (error) {
         console.error(error);
@@ -300,10 +305,10 @@ app.get("/admin/showuser", async (req, res) => {
 
 
 app.get("/admin/deleteuser",(req,res)=>{
-    res.render('admin',{ totalAmount: req.totalAmount ,template:'deleteuser'})
+    res.render('admin',{ totalAmount: req.totalAmount ,template:'deleteuser',car:cars,})
 });
 app.get("/admin/updateuser",(req,res)=>{
-    res.render('admin',{ totalAmount: req.totalAmount ,template:'updateuser'})
+    res.render('admin',{ totalAmount: req.totalAmount ,template:'updateuser',car:cars,})
 });
 // Inside index.js
 
@@ -394,16 +399,15 @@ app.post('/admin/deleteuser', async (req, res) => {
 
 app.get("/buildcar", (req, res) => {
     const index = req.query.index;
-    const car = cars[index];
-    res.render('buildCar', { car });
+    res.render('buildCar', { cars,index });
 });
 app.post('/buildcar')
 app.get("/login", (req, res) => {
-    res.render('login');
+    res.render('login',{car:cars,});
 });
 
 app.get("/signup", (req, res) => {
-    res.render('signup');
+    res.render('signup',{car:cars,});
 });
 
 const sendVerifyMail = async(firstname, email)=>{
@@ -493,12 +497,12 @@ const verifyMail = async (req, res) => {
 app.get("/email_verified", verifyMail);
 
 app.get("/forgotpassword", (req, res) => {
-    res.render('forgotpassword');
+    res.render('forgotpassword',{car:cars,});
 });
 
 app.get("/email_verify", (req, res) => {
     const { email } = req.query;
-    res.render('email_verify', { email });
+    res.render('email_verify', { email,car:cars, });
 });
 
 app.listen(port, () => {

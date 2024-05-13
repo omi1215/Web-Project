@@ -24,11 +24,10 @@
 <div class="nav--open2 close sticky">
   <div class="nav--open-icon2"><i class="fas fa-times"></i></div>
   <div class="nav--open-menu">
-    <a href="#">718</a>
-    <a href="#">911</a>
-    <a href="#">Taycan</a>
-    <a href="#">Panamera</a>
-    <a href="#">Macan</a>
-    <a href="#">Cayenne</a>
+    <div class="nav--open-menu">
+      <% cars.forEach((car, index) => { %>
+        <a href="/buildcar?index=<%= index %>"><%= car.name %></a>
+      <% }); %>
+    </div>
   </div>
 </div>
