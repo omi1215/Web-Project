@@ -9,7 +9,7 @@ const getCarsFromDB = require('./models');
 const offers = require('./offers');
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
-const session=require('express-session')
+const session=require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 
 const bcrypt=require('bcryptjs')
@@ -18,7 +18,6 @@ const { type } = require('os');
 const app = express();
 const port = 5000;
 var cars;
-var logined=0;
 mongoose.connect('mongodb://localhost:27017/Porchse', { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
@@ -77,7 +76,7 @@ const calculateTotalAmount = async (req, res, next) => {
             {
                 $group: {
                     _id: null,
-                    totalAmount: { $sum: "$ammount" } // Corrected field name to "amount"
+                    totalAmount: { $sum: "$ammount" } 
                 }
             }
         ]);
@@ -521,7 +520,6 @@ app.post('/admin/deleteuser', async (req, res) => {
 
 app.get("/buildcar", (req, res) => {
     const index = req.query.index;
-    req.session.ind
     res.render('buildCar', { cars,index });
 });
 app.get('/buycar', async (req, res) => {
@@ -601,11 +599,9 @@ const loginLoad = async(req,res)=>{
 const verifyLogin = async (req, res) => {
     try {
         const { email, password } = req.body; 
-        console.log(req.body);
         const userData = await User.findOne({ email: email });
         if (userData) {
             const passMatch =bcrypt.compare(password, userData.password);
-            console.log(passMatch);
             if (passMatch) {
                 if (userData.verified == 0) {
                     res.render('login', { message: 'Please verify your email' }); 
