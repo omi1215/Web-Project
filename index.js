@@ -77,7 +77,7 @@ const calculateTotalAmount = async (req, res, next) => {
             {
                 $group: {
                     _id: null,
-                    totalAmount: { $sum: "$amount" } // Corrected field name to "amount"
+                    totalAmount: { $sum: "$ammount" } // Corrected field name to "amount"
                 }
             }
         ]);
@@ -689,7 +689,7 @@ app.post('/signup', async (req, res) => {
                     return res.status(500).json({ error: 'Internal Server Error' });
                 }
                 try {
-                    const userCreated = await User.create({ salutation, first_name, last_name, middle_name, email, password: hash, status: 'user', verified: 0 });
+                    const userCreated = await User.create({ salutation, firstname:first_name, lastname:last_name, middlename:middle_name, email, password: hash, status: 'user', verified: 0 });
                     if (userCreated) {
                         sendVerifyMail(first_name, email);
                         console.log("User created successfully, redirecting...");
