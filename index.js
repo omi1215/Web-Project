@@ -96,28 +96,66 @@ app.use(calculateTotalAmount);
 
 app.get('/admin', async (req, res) => {
     try {
-     
-        res.render('admin', {
-            template:'',
-            totalAmount: req.totalAmount // Access totalAmount from the request object
-        });
+        if(req.session.email){
+        const user = await User.findOne({ email: req.session.email });
+        if(user.status=='admin'){
+            res.render('admin', {
+                cars:cars,
+                template:'',
+                totalAmount: req.totalAmount // Access totalAmount from the request object
+            });
+        }
+        else{
+            res.redirect('/');
+        }
+       }
+       else{
+        res.redirect('/login');
+       }
+       
     } catch (error) {
         console.error("Error:", error);
         res.status(500).send("Internal Server Error");
     }
 });
 
-app.get('/admin/createcar',(req,res)=>{
-    res.render('admin', { 
-        totalAmount: req.totalAmount ,
-        template: 'createcar', 
-    });
+app.get('/admin/createcar',async(req,res)=>{
+    if(req.session.email){
+        const user = await User.findOne({ email: req.session.email });
+        if(user.status=='admin'){
+            res.render('admin', { 
+                cars:cars,
+                totalAmount: req.totalAmount ,
+                template: 'createcar', 
+            });
+        }
+        else{
+            res.redirect('/');
+        }
+    }
+    else{
+        res.redirect('/login');
+    }
+   
 })
-app.get('/admin/updatecar',(req,res)=>{
-    res.render('admin', { 
-        totalAmount: req.totalAmount ,
-        template: 'updatecar', 
-    });
+app.get('/admin/updatecar', async(req,res)=>{
+    if(req.session.email){
+        const user = await User.findOne({ email: req.session.email });
+        if(user.status=='admin'){
+            res.render('admin', { 
+                cars:cars,
+                totalAmount: req.totalAmount ,
+                template: 'updatecar', 
+            });
+        }
+        else{
+            res.redirect('/');
+        }
+    }
+    else{
+        res.redirect('/login');
+    }
+    
 })
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -197,23 +235,48 @@ app.get("/admin/showcars", async (req, res) => {
         const cars = await Car.find(filter).skip(skip).limit(CARS_PER_PAGE).lean();
 
         // Pass data to the view
-        res.render('admin', { 
-            totalAmount: req.totalAmount ,
-            cars, 
-            template: 'showcars', 
-            totalPages,
-            currentPage: page
-        });
+        if(req.session.email){
+            const user = await User.findOne({ email: req.session.email });
+            if(user.status=='admin'){
+                res.render('admin', { 
+                    totalAmount: req.totalAmount ,
+                    cars, 
+                    template: 'showcars', 
+                    totalPages,
+                    currentPage: page
+                });
+            }
+            else{
+                res.redirect('/');
+            }
+        }
+        else{
+            res.redirect('/login');
+        }
+       
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
     }
 });
-app.get('/admin/deletecar',(req,res)=>{
-    res.render('admin', { 
-        totalAmount: req.totalAmount ,
-        template: 'deletecar', 
-    });
+app.get('/admin/deletecar',async (req,res)=>{
+    if(req.session.email){
+        const user = await User.findOne({ email: req.session.email });
+        if(user.status=='admin'){
+            res.render('admin', { 
+                cars:cars,
+                totalAmount: req.totalAmount ,
+                template: 'deletecar', 
+            });
+        }
+        else{
+            res.redirect('/');
+        }
+    }
+    else{
+        res.redirect('/login');
+    }
+    
 })
 app.post('/admin/deletecar', async (req, res) => {
     const { deletecar } = req.body;
@@ -309,15 +372,28 @@ app.get("/admin/showuser", async (req, res) => {
 
         // Fetch users for the current page based on filters
         const users = await User.find(filter).skip(skip).limit(ITEMS_PER_PAGE).lean();
+        if(req.session.email){
+            const user = await User.findOne({ email: req.session.email });
+            if(user.status=='admin'){
+                res.render('admin', { 
+                    cars:cars,
+                    totalAmount: req.totalAmount ,
+                    users, 
+                    template: 'showuser', 
+                    totalPages,
+                    currentPage: page
+                });
+            }
+            else{
+                res.redirect('/');
+            }
+        }
+        else{
+            res.redirect('/login');
+        }
 
         // Pass data to the view
-        res.render('admin', { 
-            totalAmount: req.totalAmount ,
-            users, 
-            template: 'showuser', 
-            totalPages,
-            currentPage: page
-        });
+       
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
@@ -325,11 +401,35 @@ app.get("/admin/showuser", async (req, res) => {
 });
 
 
-app.get("/admin/deleteuser",(req,res)=>{
-    res.render('admin',{ totalAmount: req.totalAmount ,template:'deleteuser'})
+app.get("/admin/deleteuser",async (req,res)=>{
+    if(req.session.email){
+        const user = await User.findOne({ email: req.session.email });
+        if(user.status=='admin'){
+            res.render('admin',{ totalAmount: req.totalAmount ,template:'deleteuser',cars:cars});
+        }
+        else{
+            res.redirect('/');
+        }
+    }
+    else{
+        res.redirect('/login');
+    }
+    
 });
-app.get("/admin/updateuser",(req,res)=>{
-    res.render('admin',{ totalAmount: req.totalAmount ,template:'updateuser'})
+app.get("/admin/updateuser", async (req,res)=>{
+    if(req.session.email){
+        const user = await User.findOne({ email: req.session.email });
+        if(user.status=='admin'){
+            res.render('admin',{ totalAmount: req.totalAmount ,template:'updateuser',cars:cars})
+        }
+        else{
+            res.redirect('/');
+        }
+    }
+    else{
+        res.redirect('/login');
+    }
+   
 });
 // Inside index.js
 
@@ -476,7 +576,7 @@ const loginLoad = async(req,res)=>{
         // Check if user is already logged in
         if(req.session.email){
             console.log(`User ${req.session.email} is already logged in, redirecting to default route`);
-            return res.redirect('/'); // Redirect to default route
+            return res.redirect('/user_dash'); // Redirect to default route
         }
         res.render('login');
     } catch(error){
@@ -497,8 +597,14 @@ const verifyLogin = async (req, res) => {
                     res.render('login', { message: 'Please verify your email' }); 
                 } else {
                     req.session.email=email;
-                    console.log(`Session created for ${email}`)
+                    if(userData.status=='admin'){
+                        res.redirect('/admin'); 
+                    }
+                    else{
                     res.redirect('/'); 
+                    }
+                    
+                    
                 }
             } else {
                 res.render('login', { message: "Email and password is incorrect" });
@@ -592,10 +698,10 @@ app.post('/signup', async (req, res) => {
 
 app.post('/user_dash', async (req, res) => {
     try {
-        const { oldEmail, newEmail } = req.body;
+        const {newEmail } = req.body;
 
         // Find the user with the old email
-        const user = await User.findOne({ email: oldEmail });
+        const user = await User.findOne({ email: req.session.email });
 
         if (!user) {
             // No user found with the old email
@@ -604,6 +710,7 @@ app.post('/user_dash', async (req, res) => {
 
         // Update the user's email
         user.email = newEmail;
+        req.session.email=newEmail;
 
         // Save the updated user
         await user.save();
@@ -669,7 +776,8 @@ app.get("/email_verify", (req, res) => {
 
 app.get('/user_dash', (req, res) => {
     try {
-        res.render('user_dash',{cars});
+        const email=req.session.email;
+        res.render('user_dash',{cars,email});
     } catch (error) {
         console.error('Error:', error);
         res.status(500).send('Internal Server Error');
