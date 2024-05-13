@@ -590,6 +590,31 @@ app.post('/signup', async (req, res) => {
     }
 });
 
+app.post('/user_dash', async (req, res) => {
+    try {
+        const { oldEmail, newEmail } = req.body;
+
+        // Find the user with the old email
+        const user = await User.findOne({ email: oldEmail });
+
+        if (!user) {
+            // No user found with the old email
+            return res.status(404).send('User not found');
+        }
+
+        // Update the user's email
+        user.email = newEmail;
+
+        // Save the updated user
+        await user.save();
+
+        // Redirect back to the user dashboard
+        res.redirect('/user_dash');
+    } catch (error) {
+        console.error('Error updating user email:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
 
 
 const verifyMail = async (req, res) => {
@@ -640,6 +665,15 @@ app.get("/forgotpassword", (req, res) => {
 app.get("/email_verify", (req, res) => {
     const { email } = req.query;
     res.render('email_verify', { email });
+});
+
+app.get('/user_dash', (req, res) => {
+    try {
+        res.render('user_dash',{cars});
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).send('Internal Server Error');
+    }
 });
 
 app.listen(port, () => {

@@ -1,0 +1,45 @@
+/* Add your custom styles for the user profile page here */
+
+/* Example styles */
+.card {
+    background-color: #f8f9fa; /* Light gray background color */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    padding: 20px; /* Padding around the card */
+  }
+  
+  .card-header {
+    background-color: #007bff; /* Blue header background color */
+    color: #fff; /* White text color */
+    padding: 10px; /* Padding inside the header */
+  }
+  
+  .card-title {
+    font-size: 24px; /* Larger title font size */
+  }
+  
+  .card-body {
+    padding-top: 20px; /* Additional padding at the top of the card body */
+  }
+  
+  .form-group {
+    margin-bottom: 20px; /* Margin between form groups */
+  }
+  
+  label {
+    font-weight: bold; /* Bold label text */
+  }
+  
+  button[type="submit"] {
+    background-color: #007bff; /* Blue submit button background color */
+    color: #fff; /* White text color */
+    border: none; /* No border */
+    padding: 10px 20px; /* Padding inside the button */
+    cursor: pointer; /* Pointer cursor on hover */
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  
+  

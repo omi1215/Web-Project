@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <style>
+        .mainbox{
+            display: flex;
+            height: calc(100vh - 70px);
+            margin-top: 70px;
+        }
+        .options{
+            flex: 1;
+            height: 100%;
+            padding: 20px;
+        }
+        .edit{
+            flex: 2;
+            height: 100%;
+            padding: 20px;
+        }
+        #updateForm {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/index.js"></script>
+    <%- include('./partials/header.ejs') %>
+    
+    <div class="container-fluid mainbox">
+        <!-- User Profile -->
+        <div class="card options">
+            <div class="card-header">
+                <h3 class="card-title">User Profile</h3>
+            </div>
+            <div class="card-body">
+                <p><strong>Email:</strong> Om Parkash</p>
+            </div>
+        </div>
+
+        <!-- Edit section -->
+        <div class="card edit" id="editContent">
+            <div class="card-body">
+                <h3>Profile Information</h3>
+                <!-- Update button -->
+                <button class="btn btn-primary mb-3" id="toggleUpdate">Update Information</button>
+
+                <!-- Update form -->
+                <form id="updateForm" action="/user_dash" method="post">
+                    <div class="form-group">
+                        <label for="oldEmail">Old Email:</label>
+                        <input type="email" class="form-control" id="oldEmail" name="oldEmail" placeholder="Enter old email">
+                    </div>
+                    <div class="form-group">
+                        <label for="newEmail">New Email:</label>
+                        <input type="email" class="form-control" id="newEmail" name="newEmail" placeholder="Enter new email">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Confirm Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <%- include('./partials/footer.ejs') %>
+
+    <script>
+        document.getElementById('toggleUpdate').addEventListener('click', function() {
+            var form = document.getElementById('updateForm');
+            if (form.style.display === 'none') {
+                form.style.display = 'block';
+                this.textContent = 'Cancel Update';
+            } else {
+                form.style.display = 'none';
+                this.textContent = 'Update Information';
+            }
+        });
+    </script>
+</body>
+</html>
