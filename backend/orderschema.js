@@ -10,6 +10,6 @@ const orderSchema = new mongoose.Schema({
     rim:String,
 });
 
-const order = mongoose.model('order', orderSchema, 'orders'); // Specify the collection name as the third argument
+const order = mongoose.model('order', orderSchema, 'orders'); 
 
 module.exports = order;

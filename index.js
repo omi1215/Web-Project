@@ -9,8 +9,12 @@ const getCarsFromDB = require('./models');
 const offers = require('./offers');
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
+const session=require('express-session')
+const MongoDBStore = require('connect-mongodb-session')(session);
+
 const bcrypt=require('bcryptjs')
-const multer  = require('multer')
+const multer  = require('multer');
+const { type } = require('os');
 const app = express();
 const port = 5000;
 var cars;
@@ -31,6 +35,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+
+
 (async () => {
     try {
         cars = await getCarsFromDB();
@@ -41,6 +48,27 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/',(req,res)=>{
     res.render('index',{cars,offers});
 })
+
+
+const store = new MongoDBStore({
+    uri: 'mongodb://localhost:27017/Porchse',
+    collection: 'sessions'
+  });
+
+
+  app.use(session({
+    secret: 'abc',
+    resave: false,
+    saveUninitialized: true,
+    store: store,
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 2 // 2 hours
+    }
+  }));
+  store.on('error', function(error) {
+    console.error(error);
+  });
+
 // Define the middleware function to calculate the total amount
 const calculateTotalAmount = async (req, res, next) => {
     try {
@@ -392,29 +420,84 @@ app.post('/admin/deleteuser', async (req, res) => {
 
 app.get("/buildcar", (req, res) => {
     const index = req.query.index;
-    const car = cars[index];
-    res.render('buildCar', { car });
+    req.session.ind
+    res.render('buildCar', { cars,index });
 });
-app.post('/buildcar')
+app.get('/buycar', async (req, res) => {
+    try {
+        // Access order data from session
+        const { name, selectedrim, selectedcolor, price, email } = req.session.orderdata;
+
+        // Create a new order document directly in the database
+         await order.create({
+            email: email,
+            ammount: price,
+            date: new Date().toISOString(),
+            status: 'confirmed',
+            carname: name,
+            color: selectedcolor,
+            rim: selectedrim
+        });
+
+        // Redirect to the order confirmation page or render it directly
+        res.render('orderconfirm', { name, selectedrim, selectedcolor, price, email, cars });
+    } catch (error) {
+        console.error("Error creating order:", error);
+        res.status(500).send("Error creating order");
+    }
+});
+
+app.post("/buildCar", (req, res) => {
+    try {
+
+        // Access the data sent from the client-side
+        const name = req.body.name;
+        const selectedrim = req.body.selectedrim;
+        const selectedcolor = req.body.selectedcolor;
+        let price = req.body.price;
+        price = parseInt(price);
+        price = price + 1500 + 2500;
+        email=req.session.email;
+        if (req.session.email) {
+            req.session.orderdata={ name, selectedrim, selectedcolor, price, email };
+            res.redirect('/buycar');
+        } else {
+            res.redirect('/login'); 
+        }
+    } catch (error) {
+        console.error("Error rendering order confirmation:", error);
+        res.status(500).send("Error rendering order confirmation page");
+    }
+});
+
 
 const loginLoad = async(req,res)=>{
     try{
-   res.render('login');}
-   catch(error){
-    console.log(error.message);
-   }
+        // Check if user is already logged in
+        if(req.session.email){
+            console.log(`User ${req.session.email} is already logged in, redirecting to default route`);
+            return res.redirect('/'); // Redirect to default route
+        }
+        res.render('login');
+    } catch(error){
+        console.log(error.message);
+    }
 }
+
 const verifyLogin = async (req, res) => {
     try {
         const { email, password } = req.body; 
         console.log(req.body);
         const userData = await User.findOne({ email: email });
         if (userData) {
-            const passMatch = await bcrypt.compare(password, userData.password);
+            const passMatch =bcrypt.compare(password, userData.password);
+            console.log(passMatch);
             if (passMatch) {
                 if (userData.verified == 0) {
                     res.render('login', { message: 'Please verify your email' }); 
                 } else {
+                    req.session.email=email;
+                    console.log(`Session created for ${email}`)
                     res.redirect('/'); 
                 }
             } else {

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/css/footer.css">
+</head>
+<body>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/index.js"></script>
+    <%- include('./partials/header.ejs')  %>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col text-center">
+                <h1>Order Confirmation</h1>
+                <hr> <!-- Horizontal line below the heading -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col text-left">
+                        <h5>Customer Email</h5>
+                    </div>
+                    <div class="col text-right">
+                        <h5 id="customer-email"><%= email %></h5> <!-- Display customer email here -->
+                    </div>
+                </div>
+                <hr> <!-- Horizontal line after the first row -->
+                <div class="row">
+                    <div class="col text-left">
+                        <h5>Car</h5>
+                    </div>
+                    <div class="col text-right">
+                        <h5 id="selected-car">Porsche <%= name %></h5> <!-- Display selected car here -->
+                    </div>
+                </div>
+                <hr> <!-- Horizontal line after the second row -->
+                <div class="row">
+                    <div class="col text-left">
+                        <h5>Rim</h5>
+                    </div>
+                    <div class="col text-right">
+                        <h5 id="selected-rim"><%= selectedrim %></h5> <!-- Display selected rim here -->
+                    </div>
+                </div>
+                <hr> <!-- Horizontal line after the third row -->
+                <div class="row">
+                    <div class="col text-left">
+                        <h5>Color</h5>
+                    </div>
+                    <div class="col text-right">
+                        <h5 id="selected-color"><%= selectedcolor %></h5> <!-- Display selected color here -->
+                    </div>
+                </div>
+                <hr> <!-- Horizontal line after the fourth row -->
+            </div>
+            <div class="row">
+                <div class="col text-left">
+                    <h5>Total Amount</h5>
+                </div>
+                <div class="col text-right">
+                    <h5 id="selected-color"><%= price %></h5> <!-- Display selected color here -->
+                </div>
+            </div>
+            <hr> <!-- Horizontal line after the fourth row -->
+        </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col text-center">
+                        <h3>Order Confirmed</h3> <!-- Display confirmation message -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <%- include('./partials/footer.ejs') %>
+    <!-- Add necessary scripts -->
+</body>
+</html>
